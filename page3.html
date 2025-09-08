@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Simi - Memories & Fun</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8c8dc, #e6a8c7, #d688b8, #ff6b9d);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .greeting {
+            color: #333;
+            font-size: 18px;
+            font-weight: normal;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-item:hover::before {
+            left: 100%;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.4);
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-title {
+            font-size: clamp(36px, 5vw, 48px);
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .birthday-countdown {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 0 0 50px 0;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .countdown-text {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff6b9d;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            animation: countdownPulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes countdownPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+            width: 100%;
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+        }
+        
+        .photo-placeholder {
+            height: 200px;
+            background: linear-gradient(45deg, rgba(248, 200, 220, 0.8), rgba(230, 168, 199, 0.9));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .photo-placeholder:hover::before {
+            left: 100%;
+        }
+        
+        .photo-placeholder:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .photo-text {
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+        
+        .birthday-quiz {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            max-width: 700px;
+            animation: fadeInUp 1.4s ease-out 0.6s both;
+        }
+        
+        .quiz-question {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-option.correct {
+            background: linear-gradient(45deg, #90EE90, #98FB98);
+            animation: correctAnswer 0.6s ease;
+        }
+        
+        .quiz-option.incorrect {
+            background: linear-gradient(45deg, #FFB6C1, #FFA0AC);
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes correctAnswer {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .final-message {
+            text-align: center;
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            margin-top: 30px;
+            animation: fadeInUp 1.6s ease-out 0.8s both;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.9));
+            padding: 50px;
+            border-radius: 25px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+            transform: scale(1.2);
+        }
+        
+        /* Decorative elements */
+        .decoration {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .decoration:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .decoration:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+        
+        .decoration:nth-child(3) {
+            width: 70px;
+            height: 70px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-15px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(-10px) rotate(240deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav {
+                gap: 15px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            .photo-gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .countdown-display {
+                font-size: 36px;
+            }
+            
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .final-message {
+                font-size: 18px;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    
+    <header class="header">
+        <div class="greeting">Hey Simi ✨</div>
+        <nav class="nav">
+            <a href="index.html" class="nav-item">Page 1</a>
+            <a href="page2.html" class="nav-item">Page 2</a>
+            <a href="page3.html" class="nav-item active">Page 3</a>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <h2 class="page-title">🎂 Birthday Memories & Fun</h2>
+        
+        <div class="birthday-countdown">
+            <div class="countdown-text">🎊 Birthday Celebration Mode:</div>
+            <div class="countdown-display">ACTIVE! 🎉</div>
+        </div>
+        
+        <div class="photo-gallery">
+            <div class="photo-placeholder" onclick="showPhoto('memory1')">
+                <span class="photo-text">📸 Birthday Memories</span>
+            </div>
+            <div class="photo-placeholder" onclick="showPhoto('memory2')">
+                <span class="photo-text">🎈 Fun Moments</span>
+            </div>
+            <div class="photo-placeholder" onclick="showPhoto('memory3')">
+                <span class="photo-text">🌟 Special Times</span>
+            </div>
+            <div class="photo-placeholder" onclick="showPhoto('memory4')">
+                <span class="photo-text">💫 Sweet Memories</span>
+            </div>
+        </div>
+        
+        <div class="birthday-quiz">
+            <div class="quiz-question">🎯 Birthday Fun Quiz: What's Simi's favorite way to celebrate?</div>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="answerQuiz(this, false)">🏠 Quiet night at home</button>
+                <button class="quiz-option" onclick="answerQuiz(this, false)">🎉 Party with friends</button>
+                <button class="quiz-option" onclick="answerQuiz(this, false)">🌴 Beach vacation</button>
+                <button class="quiz-option" onclick="answerQuiz(this, true)">🍽️ Fancy dinner</button>
+            </div>
+        </div>
+        
+        <p class="final-message">
+            May this year bring you endless joy, amazing adventures, and all the happiness your heart can hold! 🎊💖
+        </p>
+    </main>
+    
+    <!-- Modal for photos and quiz results -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    
+    <script>
+        function showPhoto(memoryId) {
+            const memories = {
+                memory1: {
+                    title: "📸 Birthday Memories",
+                    content: `
+                        <div style="text-align: center;">
+                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #ff6b9d, #c44569); 
+                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
+                                        justify-content: center; font-size: 48px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                                🎂🎈🎉
+                            </div>
+                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+                                Amazing birthday moments captured throughout the years! From surprise parties to quiet celebrations, 
+                                every memory with you is special and fills our hearts with joy.
+                            </p>
+                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
+                                "The best birthdays are the ones spent with the people who matter most!" 💕
+                            </p>
+                        </div>
+                    `
+                },
+                memory2: {
+                    title: "🎈 Fun Moments",
+                    content: `
+                        <div style="text-align: center;">
+                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #f8c8dc, #e6a8c7); 
+                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
+                                        justify-content: center; font-size: 48px; color: #333; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">
+                                🎊🥳🎯
+                            </div>
+                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+                                Those unforgettable fun moments - dancing until midnight, laughing until our cheeks hurt, 
+                                and creating memories that will last a lifetime. Your infectious laugh makes every moment magical!
+                            </p>
+                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
+                                "Life is better when you're laughing with friends!" 🌟
+                            </p>
+                        </div>
+                    `
+                },
+                memory3: {
+                    title: "🌟 Special Times",
+                    content: `
+                        <div style="text-align: center;">
+                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #d688b8, #c44569); 
+                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
+                                        justify-content: center; font-size: 48px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                                ✨💫🌙
+                            </div>
+                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+                                Those quiet, special moments that mean the most - heartfelt conversations, shared dreams, 
+                                and the beautiful bond of friendship that grows stronger each year.
+                            </p>
+                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
+                                "Special moments become treasured memories!" 💎
+                            </p>
+                        </div>
+                    `
+                },
+                memory4: {
+                    title: "💫 Sweet Memories",
+                    content: `
+                        <div style="text-align: center;">
+                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #FFB6C1, #FFA0AC); 
+                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
+                                        justify-content: center; font-size: 48px; color: #333; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">
+                                🍰🎁💝
+                            </div>
+                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+                                Sweet memories of birthday cakes, surprise gifts, and the pure joy on your face when 
+                                you're surrounded by love. These moments remind us why birthdays are so magical!
+                            </p>
+                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
+                                "Sweet memories are the gifts that keep on giving!" 🎀
+                            </p>
+                        </div>
+                    `
+                }
+            };
+            
+            const modal = document.getElementById('messageModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <h3 style="color: #d688b8; margin-bottom: 25px; font-size: 28px;">${memories[memoryId].title}</h3>
+                ${memories[memoryId].content}
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function answerQuiz(button, isCorrect) {
+            const allOptions = document.querySelectorAll('.quiz-option');
+            
+            // Disable all options
+            allOptions.forEach(option => {
+                option.disabled = true;
+                option.style.cursor = 'not-allowed';
+            });
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                setTimeout(() => {
+                    showQuizResult(true);
+                }, 1000);
+            } else {
+                button.classList.add('incorrect');
+                // Show correct answer
+                allOptions.forEach(option => {
+                    if (option.onclick.toString().includes('true')) {
+                        setTimeout(() => {
+                            option.classList.add('correct');
+                        }, 500);
+                    }
+                });
+                setTimeout(() => {
+                    showQuizResult(false);
+                }, 1500);
+            }
+        }
+        
+        function showQuizResult(isCorrect) {
+            const modal = document.getElementById('messageModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            if (isCorrect) {
+                modalContent.innerHTML = `
+                    <h3 style="color: #90EE90; margin-bottom: 25px; font-size: 32px;">🎉 Correct! 🎉</h3>
+                    <p style="color: #333; line-height: 1.8; font-size: 20px; margin-bottom: 20px;">
+                        You know Simi so well! She absolutely loves celebrating with friends and family. 
+                        There's nothing better than being surrounded by the people you care about most!
+                    </p>
+                    <div style="font-size: 48px; margin: 20px 0;">🥳🎊🎈</div>
+                    <p style="color: #d688b8; font-weight: 600; font-size: 18px;">
+                        Thanks for being such an amazing friend who truly knows her! 💕
+                    </p>
+                `;
+            } else {
+                modalContent.innerHTML = `
+                    <h3 style="color: #FFA0AC; margin-bottom: 25px; font-size: 28px;">💖 Close, but not quite! 💖</h3>
+                    <p style="color: #333; line-height: 1.8; font-size: 18px; margin-bottom: 20px;">
+                        Simi's favorite way to celebrate is with a party surrounded by friends! 
+                        She loves the energy, laughter, and joy that comes from celebrating with her favorite people.
+                    </p>
+                    <div style="font-size: 36px; margin: 20px 0;">🎉👥💕</div>
+                    <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
+                        Thanks for playing along with the birthday fun! 🎈
+                    </p>
+                `;
+            }
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Reset quiz if needed
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.disabled = false;
+                option.style.cursor = 'pointer';
+                option.classList.remove('correct', 'incorrect');
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const messageModal = document.getElementById('messageModal');
+            
+            if (event.target == messageModal) {
+                closeModal();
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (document.getElementById('messageModal').style.display === 'block') {
+                    closeModal();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍒 Happy Birthday Simi 🍒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8c8dc, #e6a8c7, #d688b8, #ff6b9d);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .greeting {
+            color: #333;
+            font-size: 18px;
+            font-weight: normal;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-item:hover::before {
+            left: 100%;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.4);
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .birthday-title {
+            font-size: clamp(60px, 8vw, 120px);
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            letter-spacing: 3px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out, titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            from {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            to {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 255, 255, 0.6);
+            }
+        }
+        
+        .birthday-message {
+            font-size: clamp(24px, 3vw, 36px);
+            color: #333;
+            margin-bottom: 50px;
+            max-width: 800px;
+            line-height: 1.4;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        .celebration-btn {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.9), rgba(248, 200, 220, 0.9));
+            color: #d688b8;
+            border: none;
+            padding: 20px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 1s ease-out 0.6s both, pulse 2s infinite;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .celebration-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.5s;
+        }
+        
+        .celebration-btn:hover::before {
+            left: 100%;
+        }
+        
+        .celebration-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(248, 200, 220, 1));
+        }
+        
+        /* Decorative elements */
+        .decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        .decoration:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 15%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+        
+        .decoration:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            right: 12%;
+            animation-delay: 2s;
+        }
+        
+        .decoration:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+        
+        .decoration:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            top: 30%;
+            right: 30%;
+            animation-delay: 1s;
+        }
+        
+        .decoration:nth-child(5) {
+            width: 90px;
+            height: 90px;
+            bottom: 40%;
+            right: 8%;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-25px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(-15px) rotate(240deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav {
+                gap: 15px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            
+            .birthday-message {
+                font-size: 20px;
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    
+    <header class="header">
+        <div class="greeting">Hey Simi ✨</div>
+        <nav class="nav">
+            <a href="index.html" class="nav-item active">Page 1</a>
+            <a href="page2.html" class="nav-item">Page 2</a>
+            <a href="page3.html" class="nav-item">Page 3</a>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <h1 class="birthday-title">Happy Birthday Simi!</h1>
+        <p class="birthday-message">Wishing you a day filled with love, joy, and magical moments! 🌟</p>
+        <button class="celebration-btn" onclick="startCelebration()">Start the celebration</button>
+    </main>
+    
+    <script>
+        function startCelebration() {
+            const btn = document.querySelector('.celebration-btn');
+            
+            // Update button appearance
+            btn.innerHTML = '🎉 Let\'s Party! 🎉';
+            btn.style.background = 'linear-gradient(45deg, #ff6b9d, #c44569)';
+            btn.style.color = 'white';
+            btn.style.animation = 'none';
+            
+            // Create confetti effect
+            createConfetti();
+            
+            // Add birthday music simulation
+            setTimeout(() => {
+                btn.innerHTML = '🎵 Birthday Magic Playing! 🎵';
+                btn.onclick = function() {
+                    createConfetti();
+                    btn.innerHTML = '✨ More Magic! ✨';
+                    setTimeout(() => {
+                        btn.innerHTML = '🎵 Birthday Magic Playing! 🎵';
+                    }, 2000);
+                };
+            }, 2000);
+        }
+        
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#c44569', '#f8c8dc', '#e6a8c7', '#d688b8', '#FFD700', '#FF69B4'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = Math.random() * 15 + 5 + 'px';
+                confetti.style.height = Math.random() * 15 + 5 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '9999';
+                confetti.style.animation = `confettiFall ${Math.random() * 4 + 3}s linear forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.remove();
+                    }
+                }, 7000);
+            }
+        }
+        
+        // Add confetti animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

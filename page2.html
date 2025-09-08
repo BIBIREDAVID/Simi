@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍒 Happy Birthday Simi 🍒</title>
+    <title>Happy Birthday Simi - Videos & Messages</title>
     <style>
         * {
             margin: 0;
@@ -14,9 +14,19 @@
         body {
             font-family: 'Georgia', serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #f8c8dc, #e6a8c7, #d688b8);
+            background: linear-gradient(135deg, #f8c8dc, #e6a8c7, #d688b8, #ff6b9d);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .header {
@@ -24,14 +34,16 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .greeting {
             color: #333;
             font-size: 18px;
             font-weight: normal;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
         }
         
         .nav {
@@ -43,20 +55,39 @@
             color: #333;
             text-decoration: none;
             font-size: 16px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.4s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-item:hover::before {
+            left: 100%;
         }
         
         .nav-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .nav-item.active {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.4);
             font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
         .main-content {
@@ -66,99 +97,152 @@
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
-            gap: 50px;
+            gap: 60px;
+        }
+        
+        .page-title {
+            font-size: clamp(36px, 5vw, 48px);
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .video-section {
             display: flex;
             justify-content: center;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
         
         .video-placeholder {
-            width: 450px;
-            height: 250px;
-            background: rgba(248, 245, 245, 0.95);
-            border-radius: 15px;
+            width: 500px;
+            height: 280px;
+            background: linear-gradient(45deg, rgba(248, 245, 245, 0.95), rgba(230, 168, 199, 0.8));
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .video-placeholder:hover::before {
+            left: 100%;
         }
         
         .video-placeholder:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         }
         
         .video-text {
-            font-size: 20px;
+            font-size: 24px;
             color: #333;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         }
         
         .play-button {
-            font-size: 30px;
+            font-size: 40px;
             color: #d688b8;
-            background: rgba(214, 136, 184, 0.1);
+            background: rgba(214, 136, 184, 0.2);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(214, 136, 184, 0.3);
         }
         
         .play-button:hover {
-            background: rgba(214, 136, 184, 0.2);
-            transform: scale(1.1);
+            background: rgba(214, 136, 184, 0.3);
+            transform: scale(1.2);
+            box-shadow: 0 6px 20px rgba(214, 136, 184, 0.4);
         }
         
         .messages-section {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             justify-content: center;
-            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1.2s ease-out 0.4s both;
         }
         
         .message-card {
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
         
         .message-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) rotate(2deg);
         }
         
         .message-placeholder {
-            width: 180px;
-            height: 180px;
-            background: rgba(190, 190, 190, 0.8);
-            border-radius: 15px;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(190, 190, 190, 0.8), rgba(214, 136, 184, 0.6));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .message-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .message-placeholder:hover::before {
+            left: 100%;
         }
         
         .message-placeholder:hover {
-            background: rgba(190, 190, 190, 0.9);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(45deg, rgba(190, 190, 190, 0.9), rgba(214, 136, 184, 0.8));
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
         }
         
         .message-text {
-            font-size: 16px;
+            font-size: 18px;
             color: #333;
             font-weight: 600;
-            line-height: 1.3;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         }
         
         .modal {
@@ -170,7 +254,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
         }
         
         .modal-content {
@@ -178,32 +262,48 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 500px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.9));
+            padding: 50px;
+            border-radius: 25px;
+            max-width: 600px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
         }
         
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
             cursor: pointer;
             color: #999;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
         
         .close-modal:hover {
             color: #333;
+            transform: scale(1.2);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         @media (max-width: 768px) {
             .header {
                 padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
             }
             
             .nav {
@@ -212,61 +312,65 @@
             
             .nav-item {
                 font-size: 14px;
-                padding: 6px 12px;
+                padding: 8px 16px;
+            }
+            
+            .main-content {
+                gap: 40px;
             }
             
             .video-placeholder {
-                width: 300px;
-                height: 180px;
+                width: 320px;
+                height: 200px;
             }
             
             .video-text {
-                font-size: 16px;
+                font-size: 18px;
             }
             
             .play-button {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
             }
             
             .messages-section {
-                gap: 20px;
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
             
             .message-placeholder {
-                width: 140px;
-                height: 140px;
-                padding: 15px;
+                width: 100%;
+                max-width: 250px;
+                margin: 0 auto;
             }
             
             .message-text {
-                font-size: 14px;
+                font-size: 16px;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .messages-section {
-                flex-direction: column;
-                align-items: center;
+            
+            .modal-content {
+                padding: 30px 20px;
             }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="greeting">Hey Simi</div>
+        <div class="greeting">Hey Simi ✨</div>
         <nav class="nav">
-            <a href="./index.html" class="nav-item">Page 1</a>
-            <a href="#" class="nav-item active">Page 2</a>
-            <a href="#" class="nav-item">Page 3</a>
+            <a href="index.html" class="nav-item">Page 1</a>
+            <a href="page2.html" class="nav-item active">Page 2</a>
+            <a href="page3.html" class="nav-item">Page 3</a>
         </nav>
     </header>
     
     <main class="main-content">
+        <h2 class="page-title">🎉 Your Special Day</h2>
+        
         <div class="video-section">
             <div class="video-placeholder" onclick="playVideo()">
-                <span class="video-text">Video Edit</span>
+                <span class="video-text">🎬 Birthday Video Edit</span>
                 <div class="play-button">▶</div>
             </div>
         </div>
@@ -274,19 +378,19 @@
         <div class="messages-section">
             <div class="message-card" onclick="showMessage('yemi')">
                 <div class="message-placeholder">
-                    <span class="message-text">Message From Yemi</span>
+                    <span class="message-text">💕 Message From Yemi</span>
                 </div>
             </div>
             
             <div class="message-card" onclick="showMessage('david')">
                 <div class="message-placeholder">
-                    <span class="message-text">Message From David</span>
+                    <span class="message-text">🎈 Message From David</span>
                 </div>
             </div>
             
             <div class="message-card" onclick="showMessage('demi')">
                 <div class="message-placeholder">
-                    <span class="message-text">Message From Demi</span>
+                    <span class="message-text">🌸 Message From Demi</span>
                 </div>
             </div>
         </div>
@@ -334,8 +438,12 @@
                                 <small style="margin-top: 10px; display: block; font-size: 16px;">
                                     "Happy Birthday Simi - A Journey of Joy"
                                 </small>
+                                <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
+                                    Click to restart ↻
+                                </div>
                             </div>
                         `;
+                        videoPlaceholder.onclick = playVideo; // Allow restart
                     }, 500);
                 }
             }, 50);
@@ -361,23 +469,24 @@
             const modalContent = document.getElementById('modalContent');
             
             modalContent.innerHTML = `
-                <h3 style="color: #d688b8; margin-bottom: 25px; font-size: 26px;">${messages[person].title}</h3>
-                <p style="color: #333; line-height: 1.7; font-size: 17px;">${messages[person].content}</p>
+                <h3 style="color: #d688b8; margin-bottom: 25px; font-size: 28px;">${messages[person].title}</h3>
+                <p style="color: #333; line-height: 1.8; font-size: 18px;">${messages[person].content}</p>
             `;
             
             modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
         
         function closeModal() {
             document.getElementById('messageModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
+            document.body.style.overflow = 'auto';
         }
         
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('messageModal');
-            if (event.target == modal) {
+            const messageModal = document.getElementById('messageModal');
+            
+            if (event.target == messageModal) {
                 closeModal();
             }
         }
@@ -385,7 +494,9 @@
         // Close modal with Escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                closeModal();
+                if (document.getElementById('messageModal').style.display === 'block') {
+                    closeModal();
+                }
             }
         });
     </script>
