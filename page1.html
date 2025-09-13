@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍒 Happy Birthday Simi 🍒</title>
+    <audio id="birthdayAudio" preload="auto">
+    <source src="birthday-song.mp3" type="audio/mpeg">
+    <!-- <source src="birthday-song.ogg" type="audio/ogg">
+    <source src="birthday-song.wav" type="audio/wav"> -->
+    Your browser does not support the audio element.
+</audio>
     <style>
         * {
             margin: 0;
@@ -281,7 +287,7 @@
     <header class="header">
         <div class="greeting">Hey Simi ✨</div>
         <nav class="nav">
-            <a href="page1.html" class="nav-item active">Page 1</a>
+            <a href="index.html" class="nav-item active">Page 1</a>
             <a href="page2.html" class="nav-item">Page 2</a>
             <a href="page3.html" class="nav-item">Page 3</a>
         </nav>
@@ -289,19 +295,32 @@
     
     <main class="main-content">
         <h1 class="birthday-title">Happy Birthday Simi!</h1>
-        <p class="birthday-message">Bad and Boujee since '06</p>
         <p class="birthday-message">Wishing you a day filled with love, joy, and magical moments! 🌟</p>
         <button class="celebration-btn" onclick="startCelebration()">Start the celebration</button>
     </main>
-    <footer>
-        <div class="footer">
-            
-        </div>
-    </footer>
     
     <script>
+        // Authentication check
+        const SESSION_KEY = "simi_birthday_access";
+        
+        function checkAuthentication() {
+            const isAuthenticated = sessionStorage.getItem(SESSION_KEY) === "true";
+            if (!isAuthenticated) {
+                // Not authenticated, redirect to login
+                window.location.href = "login.html";
+                return false;
+            }
+            return true;
+        }
+        
+        // Check auth when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+        });
+        
         function startCelebration() {
             const btn = document.querySelector('.celebration-btn');
+            const audio = document.getElementById('birthdayAudio');
             
             // Update button appearance
             btn.innerHTML = '🎉 Let\'s Party! 🎉';
@@ -309,18 +328,43 @@
             btn.style.color = 'white';
             btn.style.animation = 'none';
             
+            // Play the birthday music
+            if (audio) {
+                audio.currentTime = 30; // Start at 30 seconds into the song
+                audio.volume = 0.5; // Set volume to 50%
+    
+                audio.play().then(() => {
+                console.log('Enjoy!');
+        
+                // Stop after 60 seconds of playback
+                setTimeout(() => {
+                audio.pause();
+                console.log('Music stopped after 60 seconds');
+            }, 60000); // 60000 milliseconds = 60 seconds
+        
+            }).catch((error) => {
+            console.log('Audio play failed:', error);
+            btn.innerHTML = '🎵 Music Ready! (Click to play) 🎵';
+});
+    }
+            
             // Create confetti effect
             createConfetti();
             
-            // Add birthday music simulation
+            // Add music controls
             setTimeout(() => {
-                btn.innerHTML = '🎵 Birthday Magic Playing! 🎵';
+                btn.innerHTML = '🎵 Birthday Music Playing! 🎵';
                 btn.onclick = function() {
+                    if (audio) {
+                        if (audio.paused) {
+                            audio.play();
+                            btn.innerHTML = '🎵 Birthday Music Playing! 🎵';
+                        } else {
+                            audio.pause();
+                            btn.innerHTML = '▶️ Resume Birthday Music';
+                        }
+                    }
                     createConfetti();
-                    btn.innerHTML = '✨ More Magic! ✨';
-                    setTimeout(() => {
-                        btn.innerHTML = '🎵 Birthday Magic Playing! 🎵';
-                    }, 2000);
                 };
             }, 2000);
         }
@@ -339,7 +383,7 @@
                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
                 confetti.style.pointerEvents = 'none';
                 confetti.style.zIndex = '9999';
-                confetti.style.animation = `confettiFall ${Math.random() * 12 + 3}s linear forwards`;
+                confetti.style.animation = `confettiFall ${Math.random() * 4 + 3}s linear forwards`;
                 
                 document.body.appendChild(confetti);
                 

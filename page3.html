@@ -460,8 +460,8 @@
             <div class="quiz-options">
                 <button class="quiz-option" onclick="answerQuiz(this, false)">🏠 Quiet night at home</button>
                 <button class="quiz-option" onclick="answerQuiz(this, false)">🎉 Party with friends</button>
-                <button class="quiz-option" onclick="answerQuiz(this, false)">🌴 Beach vacation</button>
-                <button class="quiz-option" onclick="answerQuiz(this, true)">🍽️ Fancy dinner</button>
+                <button class="quiz-option" onclick="answerQuiz(this, true)">🌴 Beach vacation</button>
+                <button class="quiz-option" onclick="answerQuiz(this, false)">🍽️ Fancy dinner</button>
             </div>
         </div>
         
@@ -544,15 +544,12 @@
                 modalContent.innerHTML = `
                     <h3 style="color: #FFA0AC; margin-bottom: 25px; font-size: 28px;">💖 Close, but not quite! 💖</h3>
                     <p style="color: #333; line-height: 1.8; font-size: 18px; margin-bottom: 20px;">
-                        Simi's favorite way to celebrate is a fancy dinner surrounded by friends! 
+                        Simi's favorite way to celebrate is a beach vacation! 
                         She loves the energy, laughter, and joy that comes from celebrating with her favorite people.
                     </p>
                     <div style="font-size: 36px; margin: 20px 0;"></div>
                     <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
                         Thanks for playing along with the birthday fun! 
-                    </p>
-                     <p style="color: #98FB98; font-weight: 600; font-size: 16px;">
-                        Correct answer is: Fancy Dinner
                     </p>
                 `;
             }
