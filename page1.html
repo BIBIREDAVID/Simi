@@ -293,6 +293,11 @@
         <p class="birthday-message">Wishing you a day filled with love, joy, and magical moments! 🌟</p>
         <button class="celebration-btn" onclick="startCelebration()">Start the celebration</button>
     </main>
+    <footer>
+        <div class="footer">
+            
+        </div>
+    </footer>
     
     <script>
         function startCelebration() {
@@ -334,7 +339,7 @@
                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
                 confetti.style.pointerEvents = 'none';
                 confetti.style.zIndex = '9999';
-                confetti.style.animation = `confettiFall ${Math.random() * 4 + 3}s linear forwards`;
+                confetti.style.animation = `confettiFall ${Math.random() * 12 + 3}s linear forwards`;
                 
                 document.body.appendChild(confetti);
                 

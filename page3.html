@@ -436,11 +436,11 @@
         <h2 class="page-title">🎂 Birthday Memories & Fun</h2>
         
         <div class="birthday-countdown">
-            <div class="countdown-text">🎊 Birthday Celebration Mode:</div>
-            <div class="countdown-display">ACTIVE! 🎉</div>
+            <div class="countdown-text">Birthday Celebration Mode:</div>
+            <div class="countdown-display">ACTIVE! ✅</div>
         </div>
         
-        <div class="photo-gallery">
+        <!-- <div class="photo-gallery">
             <div class="photo-placeholder" onclick="showPhoto('memory1')">
                 <span class="photo-text">📸 Birthday Memories</span>
             </div>
@@ -453,10 +453,10 @@
             <div class="photo-placeholder" onclick="showPhoto('memory4')">
                 <span class="photo-text">💫 Sweet Memories</span>
             </div>
-        </div>
+        </div> -->
         
         <div class="birthday-quiz">
-            <div class="quiz-question">🎯 Birthday Fun Quiz: What's Simi's favorite way to celebrate?</div>
+            <div class="quiz-question">Birthday Fun Quiz: What's Simi's favorite way to celebrate?</div>
             <div class="quiz-options">
                 <button class="quiz-option" onclick="answerQuiz(this, false)">🏠 Quiet night at home</button>
                 <button class="quiz-option" onclick="answerQuiz(this, false)">🎉 Party with friends</button>
@@ -480,84 +480,7 @@
     
     <script>
         function showPhoto(memoryId) {
-            const memories = {
-                memory1: {
-                    title: "📸 Birthday Memories",
-                    content: `
-                        <div style="text-align: center;">
-                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #ff6b9d, #c44569); 
-                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
-                                        justify-content: center; font-size: 48px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-                                🎂🎈🎉
-                            </div>
-                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
-                                Amazing birthday moments captured throughout the years! From surprise parties to quiet celebrations, 
-                                every memory with you is special and fills our hearts with joy.
-                            </p>
-                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
-                                "The best birthdays are the ones spent with the people who matter most!" 💕
-                            </p>
-                        </div>
-                    `
-                },
-                memory2: {
-                    title: "🎈 Fun Moments",
-                    content: `
-                        <div style="text-align: center;">
-                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #f8c8dc, #e6a8c7); 
-                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
-                                        justify-content: center; font-size: 48px; color: #333; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">
-                                🎊🥳🎯
-                            </div>
-                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
-                                Those unforgettable fun moments - dancing until midnight, laughing until our cheeks hurt, 
-                                and creating memories that will last a lifetime. Your infectious laugh makes every moment magical!
-                            </p>
-                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
-                                "Life is better when you're laughing with friends!" 🌟
-                            </p>
-                        </div>
-                    `
-                },
-                memory3: {
-                    title: "🌟 Special Times",
-                    content: `
-                        <div style="text-align: center;">
-                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #d688b8, #c44569); 
-                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
-                                        justify-content: center; font-size: 48px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-                                ✨💫🌙
-                            </div>
-                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
-                                Those quiet, special moments that mean the most - heartfelt conversations, shared dreams, 
-                                and the beautiful bond of friendship that grows stronger each year.
-                            </p>
-                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
-                                "Special moments become treasured memories!" 💎
-                            </p>
-                        </div>
-                    `
-                },
-                memory4: {
-                    title: "💫 Sweet Memories",
-                    content: `
-                        <div style="text-align: center;">
-                            <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #FFB6C1, #FFA0AC); 
-                                        border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; 
-                                        justify-content: center; font-size: 48px; color: #333; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">
-                                🍰🎁💝
-                            </div>
-                            <p style="color: #333; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
-                                Sweet memories of birthday cakes, surprise gifts, and the pure joy on your face when 
-                                you're surrounded by love. These moments remind us why birthdays are so magical!
-                            </p>
-                            <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
-                                "Sweet memories are the gifts that keep on giving!" 🎀
-                            </p>
-                        </div>
-                    `
-                }
-            };
+            
             
             const modal = document.getElementById('messageModal');
             const modalContent = document.getElementById('modalContent');
@@ -612,7 +535,7 @@
                         You know Simi so well! She absolutely loves celebrating with friends and family. 
                         There's nothing better than being surrounded by the people you care about most!
                     </p>
-                    <div style="font-size: 48px; margin: 20px 0;">🥳🎊🎈</div>
+                    <div style="font-size: 48px; margin: 20px 0;"></div>
                     <p style="color: #d688b8; font-weight: 600; font-size: 18px;">
                         Thanks for being such an amazing friend who truly knows her! 💕
                     </p>
@@ -621,12 +544,15 @@
                 modalContent.innerHTML = `
                     <h3 style="color: #FFA0AC; margin-bottom: 25px; font-size: 28px;">💖 Close, but not quite! 💖</h3>
                     <p style="color: #333; line-height: 1.8; font-size: 18px; margin-bottom: 20px;">
-                        Simi's favorite way to celebrate is with a party surrounded by friends! 
+                        Simi's favorite way to celebrate is a fancy dinner surrounded by friends! 
                         She loves the energy, laughter, and joy that comes from celebrating with her favorite people.
                     </p>
-                    <div style="font-size: 36px; margin: 20px 0;">🎉👥💕</div>
+                    <div style="font-size: 36px; margin: 20px 0;"></div>
                     <p style="color: #d688b8; font-weight: 600; font-size: 16px;">
-                        Thanks for playing along with the birthday fun! 🎈
+                        Thanks for playing along with the birthday fun! 
+                    </p>
+                     <p style="color: #98FB98; font-weight: 600; font-size: 16px;">
+                        Correct answer is: Fancy Dinner
                     </p>
                 `;
             }
