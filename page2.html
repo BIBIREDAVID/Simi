@@ -359,9 +359,9 @@
     <header class="header">
         <div class="greeting">Hey Simi ✨</div>
         <nav class="nav">
-            <a href="page1.html" class="nav-item">Hey Simi!</a>
-            <a href="page2.html" class="nav-item active">Love Letters</a>
-            <a href="page3.html" class="nav-item"> Fun & Casual</a>
+            <a href="index.html" class="nav-item">Hey Simi!</a>
+            <a href="page2.html" class="nav-item active">Letters</a>
+            <a href="page3.html" class="nav-item">Fun & Casual</a>
         </nav>
     </header>
     
@@ -369,28 +369,28 @@
         <h2 class="page-title">CHAPTER 19</h2>
         
         <div class="video-section">
-            <div class="video-placeholder" onclick="playVideo()">
-                <span class="video-text">🎬 Birthday Video Edit</span>
-                <div class="play-button">▶</div>
-            </div>
-        </div>
-        
+        <video id="birthdayVideo" width="500" height="280" controls style="border-radius: 20px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);">
+        <source src="birthday-video.mp4" type="video/mp4">
+        <source src="birthday-video.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+</div>
         <div class="messages-section">
             <div class="message-card" onclick="showMessage('yemi')">
                 <div class="message-placeholder">
-                    <span class="message-text"> Message From Yemi</span>
+                    <span class="message-text">💕 Message From Yemi</span>
                 </div>
             </div>
             
             <div class="message-card" onclick="showMessage('david')">
                 <div class="message-placeholder">
-                    <span class="message-text"> Message From David</span>
+                    <span class="message-text">🎈 Message From David</span>
                 </div>
             </div>
             
             <div class="message-card" onclick="showMessage('demi')">
                 <div class="message-placeholder">
-                    <span class="message-text"> Message From Demi</span>
+                    <span class="message-text">🌸 Message From Demi</span>
                 </div>
             </div>
         </div>
@@ -405,55 +405,29 @@
     </div>
     
     <script>
-        function playVideo() {
-            const videoPlaceholder = document.querySelector('.video-placeholder');
-            videoPlaceholder.innerHTML = `
-                <div style="color: #d688b8; font-size: 18px; text-align: center;">
-                    🎬 Birthday Video Playing! 🎉<br>
-                    <small style="color: #666; margin-top: 15px; display: block; font-size: 14px;">
-                        A special compilation of memories and wishes for Simi!
-                    </small>
-                    <div style="margin-top: 20px;">
-                        <div style="width: 300px; height: 8px; background: rgba(214, 136, 184, 0.2); border-radius: 4px; margin: 0 auto;">
-                            <div id="progressBar" style="width: 0%; height: 100%; background: #d688b8; border-radius: 4px; transition: width 0.1s ease;"></div>
-                        </div>
-                        <small style="color: #999; margin-top: 8px; display: block;">Loading...</small>
-                    </div>
-                </div>
-            `;
-            videoPlaceholder.style.background = 'linear-gradient(45deg, #f8c8dc, #e6a8c7)';
-            
-            // Simulate video loading
-            let progress = 0;
-            const progressBar = document.getElementById('progressBar');
-            const interval = setInterval(() => {
-                progress += 2;
-                progressBar.style.width = progress + '%';
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        videoPlaceholder.innerHTML = `
-                            <div style="color: white; font-size: 20px; text-align: center;">
-                                🎥 Now Playing! 🎂<br>
-                                <small style="margin-top: 10px; display: block; font-size: 16px;">
-                                    "Happy Birthday Simi - A Journey of Joy"
-                                </small>
-                                <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
-                                    Click to restart ↻
-                                </div>
-                            </div>
-                        `;
-                        videoPlaceholder.onclick = playVideo; // Allow restart
-                    }, 500);
-                }
-            }, 50);
+        // Authentication check
+        const SESSION_KEY = "simi_birthday_access";
+        
+        function checkAuthentication() {
+            const isAuthenticated = sessionStorage.getItem(SESSION_KEY) === "true";
+            if (!isAuthenticated) {
+                // Not authenticated, redirect to login
+                window.location.href = "login.html";
+                return false;
+            }
+            return true;
         }
+        
+        // Check auth when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+        });
         
         function showMessage(person) {
             const messages = {
                 yemi: {
                     title: "💕 Message from Yemi",
-                    content: "Noratuli mi, ore mi ata ta, happy birthday! 🎉 You bring so much light and laughter into our lives. Hope your special day is filled with all your favorite things and surrounded by the people who love you most. Can't wait to celebrate with you! Your friendship means the world to me. 🎂✨"
+                    content: "Happy Birthday, Simi! 🎉 You bring so much light and laughter into our lives. Hope your special day is filled with all your favorite things and surrounded by the people who love you most. Can't wait to celebrate with you! Your friendship means the world to me. 🎂✨"
                 },
                 david: {
                     title: "🎈 Message from David",
@@ -461,7 +435,7 @@
                 },
                 demi: {
                     title: "🌸 Message from Demi",
-                    content: "Happy Birthday to the sweetest person I know! 🎂 Simi, you have such a beautiful heart and infectious energy. Thank you for being such a wonderful friend and bringing joy wherever you go. May your birthday be as special and amazing as you are! 💖🎉Happy Birthday to a roomie turned friend 🌚🎉<br><br>I never imagined we would create a bond such as this, but it happened and that shows how much of an amazing person you are. I'm thankful for all the time we spent together and all the memories created. I wish this day shall be a day of joy, laughter and love.<br><br>Once again, Happy Birthday Nora ❤️. Enjoy your day 🎂🎉<br>I love you as much as…..😘"
+                    content: "Happy Birthday to a roomie turned friend 🌚🎉<br><br>I never imagined we would create a bond such as this, but it happened and that shows how much of an amazing person you are. I'm thankful for all the time we spent together and all the memories created. I wish this day shall be a day of joy, laughter and love.<br><br>Once again, Happy Birthday Nora ❤️. Enjoy your day 🎂🎉<br>I love you as much as…..😘"
                 }
             };
             
