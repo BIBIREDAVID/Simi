@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Simi - Photo Memories</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8c8dc, #e6a8c7, #d688b8, #ff6b9d);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .greeting {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            text-shadow: 
+                -2px -2px 0 #ff6b9d,
+                2px -2px 0 #ff6b9d,
+                -2px 2px 0 #ff6b9d,
+                2px 2px 0 #ff6b9d,
+                0 0 10px rgba(255, 107, 157, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.4);
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .page-title {
+            font-size: clamp(36px, 5vw, 48px);
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .polaroid-stack {
+            position: relative;
+            width: 320px;
+            height: 400px;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .polaroid {
+            position: absolute;
+            width: 300px;
+            background: white;
+            padding: 15px;
+            padding-bottom: 60px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 3px;
+        }
+        
+        .polaroid-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #e6a8c7, #d688b8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .polaroid-caption {
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+        
+        .polaroid:nth-child(1) {
+            z-index: 4;
+            transform: rotate(-5deg) translate(-10px, 0);
+        }
+        
+        .polaroid:nth-child(2) {
+            z-index: 3;
+            transform: rotate(-2deg) translate(5px, 5px);
+        }
+        
+        .polaroid:nth-child(3) {
+            z-index: 2;
+            transform: rotate(3deg) translate(-5px, 10px);
+        }
+        
+        .polaroid:nth-child(4) {
+            z-index: 1;
+            transform: rotate(1deg) translate(0, 15px);
+        }
+        
+        .polaroid-stack:hover .polaroid:nth-child(1) {
+            transform: rotate(-8deg) translate(-15px, -5px);
+        }
+        
+        .polaroid-stack:hover .polaroid:nth-child(2) {
+            transform: rotate(-3deg) translate(8px, 0);
+        }
+        
+        .polaroid-stack:hover .polaroid:nth-child(3) {
+            transform: rotate(5deg) translate(-8px, 5px);
+        }
+        
+        .polaroid-stack:hover .polaroid:nth-child(4) {
+            transform: rotate(2deg) translate(2px, 10px);
+        }
+        
+        /* Slideshow styles */
+        .slideshow-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 800px;
+            width: 90%;
+            background: white;
+            padding: 30px;
+            padding-bottom: 80px;
+            border-radius: 5px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .slide {
+            display: none;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .slide-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #e6a8c7, #d688b8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .slide-caption {
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 22px;
+            color: #333;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+        
+        .slideshow-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .slide-btn {
+            background: #d688b8;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .slide-btn:hover {
+            background: #c44569;
+            transform: scale(1.05);
+        }
+        
+        .slide-indicator {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .close-slideshow {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 10001;
+            transition: all 0.3s ease;
+        }
+        
+        .close-slideshow:hover {
+            color: #ff6b9d;
+            transform: scale(1.2);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            
+            .polaroid-stack {
+                width: 280px;
+                height: 350px;
+            }
+            
+            .polaroid {
+                width: 260px;
+            }
+            
+            .polaroid-image {
+                height: 250px;
+            }
+            
+            .slide-image {
+                height: 350px;
+                font-size: 60px;
+            }
+            
+            .slideshow-container {
+                padding: 20px;
+                padding-bottom: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="greeting">Hey Simi</div>
+        <nav class="nav">
+            <a href="index.html" class="nav-item">Hey Simi!</a>
+            <a href="page2.html" class="nav-item">Love Letters</a>
+            <a href="page3.html" class="nav-item">Fun & Games</a>
+            <a href="page4.html" class="nav-item active">Photo Memories</a>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <h2 class="page-title">Memory Lane</h2>
+        
+        <div class="polaroid-stack" onclick="openSlideshow()">
+            <div class="polaroid">
+                <div class="polaroid-image">📷</div>
+                <div class="polaroid-caption">Summer Vibes</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-image">🎉</div>
+                <div class="polaroid-caption">Birthday Fun</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-image">🌟</div>
+                <div class="polaroid-caption">Special Moments</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-image">💕</div>
+                <div class="polaroid-caption">Besties Forever</div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Slideshow Modal -->
+    <div id="slideshowModal" class="slideshow-modal">
+        <span class="close-slideshow" onclick="closeSlideshow()">&times;</span>
+        
+        <div class="slideshow-container">
+            <div class="slide active">
+                <div class="slide-image">📷</div>
+                <div class="slide-caption">Summer Vibes<br>Those perfect sunny days with perfect company</div>
+            </div>
+            
+            <div class="slide">
+                <div class="slide-image">🎉</div>
+                <div class="slide-caption">Birthday Fun<br>Celebrating another year of amazing memories</div>
+            </div>
+            
+            <div class="slide">
+                <div class="slide-image">🌟</div>
+                <div class="slide-caption">Special Moments<br>The little things that mean the most</div>
+            </div>
+            
+            <div class="slide">
+                <div class="slide-image">💕</div>
+                <div class="slide-caption">Besties Forever<br>Friends who become family</div>
+            </div>
+            
+            <div class="slideshow-controls">
+                <button class="slide-btn" onclick="changeSlide(-1)">← Prev</button>
+                <span class="slide-indicator"><span id="currentSlide">1</span> / 4</span>
+                <button class="slide-btn" onclick="changeSlide(1)">Next →</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Authentication check
+        const SESSION_KEY = "simi_birthday_access";
+        
+        function checkAuthentication() {
+            const isAuthenticated = sessionStorage.getItem(SESSION_KEY) === "true";
+            if (!isAuthenticated) {
+                window.location.href = "login.html";
+                return false;
+            }
+            return true;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+        });
+        
+        let currentSlideIndex = 0;
+        
+        function openSlideshow() {
+            const modal = document.getElementById('slideshowModal');
+            modal.style.display = 'flex';
+            currentSlideIndex = 0;
+            showSlide(0);
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeSlideshow() {
+            const modal = document.getElementById('slideshowModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function changeSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= slides.length) {
+                currentSlideIndex = 0;
+            }
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+            
+            showSlide(currentSlideIndex);
+        }
+        
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            document.getElementById('currentSlide').textContent = index + 1;
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('slideshowModal');
+            if (modal.style.display === 'flex') {
+                if (event.key === 'ArrowLeft') {
+                    changeSlide(-1);
+                } else if (event.key === 'ArrowRight') {
+                    changeSlide(1);
+                } else if (event.key === 'Escape') {
+                    closeSlideshow();
+                }
+            }
+        });
+        
+        // Close when clicking outside slideshow
+        document.getElementById('slideshowModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeSlideshow();
+            }
+        });
+    </script>
+</body>
+</html>
